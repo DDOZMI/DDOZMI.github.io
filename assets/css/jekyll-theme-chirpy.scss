@@ -9,3 +9,14 @@
 ';
 
 /* append your custom style below */
+
+@font-face {
+    font-family: 'ChosunIlboMyungjo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Chosunilbo_myungjo.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+body, header, h1, h2, h3, h4, h5, p {
+  font-family: "Noto Sans KR", sans-serif;
+}
