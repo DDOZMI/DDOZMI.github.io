@@ -32,31 +32,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      # Node.js 설정 및 의존성 설치 추가
+        uses: actions/checkout@v6   # v4에서 v6로 업데이트 (경고 해결)
+        
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6 # v4에서 v6로 업데이트 (경고 해결)
         with:
-          node-version: 18
+          node-version: 20 # 최신 LTS 버전에 맞춰 20으로 상향
+
       - name: Install NPM dependencies
-        run: npm install && npm run build
+        run: npm install && npm run build  # npm ci를 드디어 교체! (에러 해결)
+
       - name: Setup Ruby
-        # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@4a9ddd6f338a97768b8006bf671dfbad383215f4
         with:
-          ruby-version: '3.3' # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-          cache-version: 0 # Increment this number if you need to re-download cached gems
+          ruby-version: '3.3'
+          bundler-cache: true
+          cache-version: 0
+          
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+        
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+          
       - name: Upload artifact
-        # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
 
   # Deployment job
